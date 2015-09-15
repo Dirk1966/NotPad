@@ -13,14 +13,14 @@ for editing commit messages.  It should also work in the old
 To get trace information set environment variable DEBUG_NOTPAD.
 
 Worked inside of "git for Windows 2" environment on
-    Windows 7
-    Windows 8.1
-    Windows 10    Still some issues in "git for Windows 2"
-                  CRLF is replaced by LF in the end, but
-                  the file size is not updated.
-                  if file contained 38 bytes and 34 bytes
-                  after replacing CRLF by LF, the last
-                  4 bytes come from the old file!
+ * Windows 7
+ * Windows 8.1
+ * (partly) Windows 10 (32 bit and 64 bit)
+   * Still some issues in "git for Windows 2"
+     CRLF is replaced by LF in the end, but
+     the file size is not updated.
+     That means that if the file contained 38 bytes and 34 bytes
+     after replacing CRLF by LF, the last 4 bytes come from the old file!
 
 Worked inside of "git for Windows" environment on
-    Windows 7
+ * Windows 7
