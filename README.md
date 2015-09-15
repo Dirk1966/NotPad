@@ -15,12 +15,15 @@ To get trace information set environment variable DEBUG_NOTPAD.
 Worked inside of "git for Windows 2" environment on
  * Windows 7
  * Windows 8.1
- * (partly) Windows 10 (32 bit and 64 bit)
-   * Still some issues in "git for Windows 2"
-     CRLF is replaced by LF in the end, but
-     the file size is not updated.
-     That means that if the file contained 38 bytes and 34 bytes
-     after replacing CRLF by LF, the last 4 bytes come from the old file!
+ * Windows 10 (32 bit and 64 bit)
+   * perl 5.22 under "git for Windows 2" needed a truncate
+     before writing to function properly.
 
 Worked inside of "git for Windows" environment on
  * Windows 7
+
+Environment variables for development (example) and test:
+ * DEBUG_NOTPAD=1
+ * EDITOR_NOTPAD="ls -l"
+
+ToDo: Support file names with spaces and "weird" characters.
