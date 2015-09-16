@@ -25,14 +25,23 @@ sub ReadReplaceAndWriteFile
     my $pLinArr = shift or die "Pointer to line array not supplied";
     my $pFind   = shift or die "Find string not supplied";
     my $pRepl   = shift or die "Replace string not supplied";
+    my $ch      = 0; # Counts the changes.
     open( my $lFilHdl, "+<", $pFilNam ) or die "Could not open File for reading " . $pFilNam;
     while( my $lLin = <$lFilHdl> ) {
-        $lLin =~ s/$pFind/$pRepl/;
+        $ch += $lLin =~ s/$pFind/$pRepl/;
         push( @$pLinArr, $lLin );
     }
-    seek( $lFilHdl, 0, 0 );
-    truncate( $lFilHdl, 0 ); # Fix for perl 5.22 under "git for Windows 2", 2015-09-15
-    print( $lFilHdl @$pLinArr );
+	# Only write file if replacements were made.
+    if ( 0 != $ch ) {
+        seek( $lFilHdl, 0, 0 );
+        truncate( $lFilHdl, 0 ); # Fix for perl 5.22 under "git for Windows 2", 2015-09-15
+        print( $lFilHdl @$pLinArr );
+    }
+	else {
+		if ( defined( $ENV{ 'DEBUG_NOTPAD' } ) ) {
+			print( "No changes were made, will skip writing on file\n" );
+		}
+	}
     close( $lFilHdl );
 }
 
@@ -40,8 +49,8 @@ sub ReadReplaceAndWriteFile
 sub LsAndHexDumpFile {
     my $pFilNam = shift or die "File name parameter not supplied";
     if ( defined( $ENV{ 'DEBUG_NOTPAD' } ) ) {
-        system( "ls -l " . $pFilNam );
-        system( "hexdump -C " . $pFilNam );
+        system( "ls -l \"" . $pFilNam . "\"" );
+        system( "hexdump -C \"" . $pFilNam . "\"" );
     }
 }
 
@@ -86,17 +95,17 @@ LsAndHexDumpFile( $lFilNam );
 # Start notepad.exe with file
 if ( "linux" ne $^O ) {
     if ( ! defined( $ENV{ 'EDITOR_NOTPAD' } ) ) {
-        $lCmd = "notepad.exe " . $lFilNam;
+        $lCmd = "notepad.exe \"" . $lFilNam . "\"";
     }
     else {
-        $lCmd = $ENV{ 'EDITOR_NOTPAD' } . " " . $lFilNam;
+        $lCmd = $ENV{ 'EDITOR_NOTPAD' } . " \"" . $lFilNam . "\"";
     }
 } else {
     if ( ! defined( $ENV{ 'EDITOR_NOTPAD' } ) ) {
-       $lCmd = "ls " . $lFilNam;
+       $lCmd = "ls \"" . $lFilNam . "\"";
     }
     else {
-       $lCmd = $ENV{ 'EDITOR_NOTPAD' } . " " . $lFilNam;
+       $lCmd = $ENV{ 'EDITOR_NOTPAD' } . " \"" . $lFilNam . "\"";
     }
 }
 print( $lCmd . "\n" );

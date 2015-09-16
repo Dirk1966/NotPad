@@ -12,6 +12,11 @@ for editing commit messages.  It should also work in the old
 
 To get trace information set environment variable DEBUG_NOTPAD.
 
+No temporary file is written, the file will be edited "inline".
+
+If a file contains only one line and no replacement is made,
+writing on the file is ommitted.
+
 Worked inside of "git for Windows 2" environment on
  * Windows 7
  * Windows 8.1
@@ -26,4 +31,6 @@ Environment variables for development (example) and test:
  * DEBUG_NOTPAD=1
  * EDITOR_NOTPAD="ls -l"
 
-ToDo: Support file names with spaces and "weird" characters.
+ToDo: Support of file name characters like " " should work
+      now, but more difficult characters but the german
+      Umlaut "ö" are tested.
