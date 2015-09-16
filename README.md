@@ -32,5 +32,6 @@ Environment variables for development (example) and test:
  * EDITOR_NOTPAD="ls -l"
 
 ToDo: Support of file name characters like " " should work
-      now, but more difficult characters but the german
-      Umlaut "ö" are tested.
+      now, the German Umlaut "ö" was tested too, but other
+      difficult characters "/", "\", Chinese (???) may
+      still cause problems.
