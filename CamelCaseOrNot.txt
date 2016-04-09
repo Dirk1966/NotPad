@@ -1,0 +1,2 @@
+This is the file with the camelcase file name
+    CamelCaseOrNot.txt
