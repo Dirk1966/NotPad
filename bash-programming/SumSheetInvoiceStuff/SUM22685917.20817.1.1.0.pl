@@ -15,9 +15,10 @@ my @A = ( '<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:n
         , '<Att Ty="CHRRI" Id="20917" />'
         , '<SumItem PT="P" ArticleString="27071111.17897487.2.25.1.1" LZString="" NumItems="14" CollInd="N" BillSeqNo="20917" >'
         );
+grep( s/${lRESearch}/${1}${lREReplace}/g, @A );
 foreach my $l ( @A )
 {
-    my $lR = $l;
-    $lR =~ s/${lRESearch}/${1}${lREReplace}/;
-    print( $lR . "\n" );
+    # my $lR = $l;
+    # $lR =~ s/${lRESearch}/${1}${lREReplace}/g;
+    print( $l . "\n" );
 }
