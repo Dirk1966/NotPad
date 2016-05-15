@@ -7,13 +7,10 @@ do
     then
         lFbn=$( basename "${lF}" )
         lFBillSeqno=$( echo "${lFbn}" | sed -e "s/^[A-Z][A-Z]*[0-9][0-9]*\.\([0-9][0-9]*\)\..*/\1/" )
-        # echo "${lFBillSeqno} ${lFbn} ${lF}"
-        # lCmd="perl -p -i -e 's/ BillSeqNo=\"${lFBillSeqno}\"/ BillSeqNo=\"bsno\"/g; s/^<Att Ty="CHRRI" Id=\"${lFBillSeqno}\" \/>$/<Att\ Ty="CHRRI"\ Id=\"bsno\" \/\>/g' \"${lF}\""
-        lCmd='perl -p -i -e '\''s/ BillSeqNo="'${lFBillSeqno}'"/ BillSeqNo="bsno"/g; s/^<Att Ty="CHRRI" Id="'${lFBillSeqno}'" \/>$/<Att Ty="CHRRI" Id="bsno" \/>/g'\'' "'${lF}'"'
-        echo "${lCmd}"
-        # exec ${lCmd}
-        # $(${lCmd})
-        perl -p -i -e 's/ BillSeqNo="'${lFBillSeqno}'"/ BillSeqNo="bsno"/g; s/^<Att Ty="CHRRI" Id="'${lFBillSeqno}'" \/>$/<Att Ty="CHRRI" Id="bsno" \/>/g' "${lF}"
+        # lPE=\''s/( BillSeqNo|^<Att Ty="CHRRI" Id)="'${lFBillSeqno}'"/${1}="bsno"/g'\'
+        lPE=\''s/'${lFBillSeqno}'/bsno/g'\'
+        echo "perl -p -i -e ${lPE} \"${lF}\""
+        perl -p -i -e 's/( BillSeqNo|^<Att Ty="CHRRI" Id)="'${lFBillSeqno}'"/${1}="bsno"/g' "${lF}"
     else
         echo "\"${lF}\" is no file."
     fi
