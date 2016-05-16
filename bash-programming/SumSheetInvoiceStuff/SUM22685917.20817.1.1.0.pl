@@ -1,7 +1,7 @@
 my $lNum = 20817;
 # my $lRESearch = "=\"" . $lNum . "\"";
-# my $lRESearch = "( BillSeqNo|^<Att Ty="CHRRI" Id)=\"" . $lNum . "\"";
-my $lRESearch = "( BillSeqNo|^<Att Ty=\"CHRRI\" Id)=\"" . $lNum . "\"";
+# my $lRESearch = "( BillSeqNo|<Att Ty="CHRRI" Id)=\"" . $lNum . "\"";
+my $lRESearch = "( BillSeqNo|<Att Ty=\"CHRRI\" Id)=\"" . $lNum . "\"";
 my $lREReplace = "=\"bsno\"";
 my @A = ( '<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/MyNameSpaceMissingSchemaLocation.xsd" Sender="HeumannD" Id="160218BA00226859174" BAId="BA0022685917" BillSeqNo="20817">'
         , '<CustRef Id="ReplaceInTest" CustCode="3.143.33.4" Reseller="N" PartyType="C" BillSeqNo="20817">'
