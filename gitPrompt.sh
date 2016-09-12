@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # git prompt, developed (plus others) with the help of
-# https://stackoverflow.com/questions/21517281/ps1-command-substitution-fails-when-containing-newlines-on-msys-bash
-# http://stackoverflow.com/questions/8254120/how-to-escape-a-single-quote-in-single-quote-string-in-bash
-# and a lot of time
+#   https://stackoverflow.com/questions/21517281/ps1-command-substitution-fails-when-containing-newlines-on-msys-bash
+#   http://stackoverflow.com/questions/8254120/how-to-escape-a-single-quote-in-single-quote-string-in-bash
+# and a lot of time.
+# The file can be seen here:
+#   https://github.com/Dirk1966/NotPad/blob/gitPrompt/gitPrompt.sh
 
 called=$_
 # echo "called=${called} \$0=${0}"
