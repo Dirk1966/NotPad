@@ -40,13 +40,15 @@ else
     Time12h="\T"      ; Time12a="\@"
     PathShort="\w"    ; PathFull="\W"
     NewLine="\n"      ; Jobs="\j"
-        export PS1='\t \u@\h:\w$(M=$(git branch 2>/dev/null | sed -n -e "s/^\*\ \(.*\)/ (\1)/p")
-if [ M"" != M"${M}" ]
-then
-  echo "${M}\n\$ "
-else
-  echo "\n\$ "
-fi  )'
+    export PS1="\t \
+\u@\
+\h:\
+\w"\
+'$(M=$(git branch 2>/dev/null | sed -n -e "s/^\*\ \(.*\)/ (\1)/p")
+echo "${M}")'\
+''$'\n$ '  # ''$' for msys (git for Windows 2)
+
+  export PS1
 
   elif [ "total" == "${1}" ]
   then
