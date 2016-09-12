@@ -13,7 +13,7 @@ then
   echo "prompt environment parameter."
   echo "  Call with \". ${0}\" to set a simple black and white prompt."
   echo "  Call with \". ${0} total\" to set a fancy colored prompt."
-  echo "Supported parameters: (none)/full/color/clean"
+  echo "Supported parameters: (none), [total/full/color/clean]."
   echo "  Call with \". ${0} clean\" sets a black and"
   echo "       white prompt and resets the Window title to \"\"."
 else
