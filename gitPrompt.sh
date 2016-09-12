@@ -36,19 +36,15 @@ else
   then
     echo "PS1 set for TEST purposes."
     echo "Set simple black and white prompt, but should be area to do some fancy test stuff here!"
+    # Various variables you might want for your PS1 prompt instead
+    Time12h="\T"      ; Time12a="\@"
+    PathShort="\w"    ; PathFull="\W"
+    NewLine="\n"      ; Jobs="\j"
     export PS1='\t \u@\h:\w$(M=$(git branch 2>/dev/null | sed -n -e "s/^\*\ \(.*\)/ (\1)/p"); if [ M"" != M"${M}" ]; then echo "${M}\n\$ "; fi  )'
 
   elif [ "total" == "${1}" ]
   then
     echo "Set PS1-total."
-
-    # Various variables you might want for your PS1 prompt instead
-    Time12h="\T"
-    Time12a="\@"
-    PathShort="\w"
-    PathFull="\W"
-    NewLine="\n"
-    Jobs="\j"
 
     export PS1='$(M=$(git branch 2>/dev/null | sed -n -e "s/^\*\ \(.*\)/ (\1)/p")
 echo -n -e "\033]0;\u@\h \w ${M}\007\
