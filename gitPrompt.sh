@@ -45,7 +45,12 @@ else
 \h:\
 \w"\
 '$(M=$(git branch 2>/dev/null | sed -n -e "s/^\*\ \(.*\)/ (\1)/p")
-echo "${M}")'\
+if [ "M" != "M${M}" ]
+then
+  echo "${M}"
+else
+  echo " <<no git branch>>"
+fi)'\
 ''$'\n$ '  # ''$' for msys (git for Windows 2)
 
   export PS1
