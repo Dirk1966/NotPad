@@ -32,6 +32,11 @@ else
   Cyan="\033[0;36m"   ; BCyan="\033[1;36m"     # Cyan
   White="\033[0;37m"  ; BWhite="\033[1;37m"    # White
 
+  if [ "> " == "$PS2" ]
+  then
+    PS2="» "
+  fi
+
   if [ "TEST" == "${1}" ]
   then
     echo "PS1 set for TEST purposes."
@@ -51,21 +56,21 @@ then
 else
   echo " <<no git branch>>"
 fi)'\
-''$'\n$ '  # ''$' for msys (git for Windows 2)
+''$'\nξ '  # ''$' for msys (git for Windows 2)
 
   export PS1
 
-  elif [ "total" == "${1}" ]
+  elif [ "staycurious" == "${1}" ]
   then
     echo "Set PS1-total."
 
     export PS1='$(M=$(git branch 2>/dev/null | sed -n -e "s/^\*\ \(.*\)/ (\1)/p")
-echo -n -e "\033]0;\u@\h \w ${M}\007\
+echo -n -e "\033]0;Stay curious and sound!\007\
 ${BPurple}\t${ColOff} \
 ${Green}\u${ColOff}@${Green}\h${ColOff} \
 ${BBlue}\w${ColOff}\
 ${Cyan}${M}${ColOff}")'\
-''$'\n$ '  # MSYS: Escaping \n with '$'
+''$'\nξ '  # MSYS: Escaping \n with '$'
 
   elif [ "full" == "${1}" -o "color" == "${1}" ]
   then
@@ -85,7 +90,39 @@ ${BBlue}\w${ColOff}"\
 ${Cyan}\
 '$(git branch 2>/dev/null | sed -n -e "s/^\*\ \(.*\)/ (\1)/p")'\
 ${ColOff}\
-''$'\n$ '  # ''$' for msys (git for Windows 2)
+''$'\nξ '  # ''$' for msys (git for Windows 2)
+
+  elif [ "total" == "${1}" ]
+  then
+    echo "Set PS1-total."
+
+    export PS1='$(M=$(git branch 2>/dev/null | sed -n -e "s/^\*\ \(.*\)/ (\1)/p")
+echo -n -e "\033]0;\u@\h \w ${M}\007\
+${BPurple}\t${ColOff} \
+${Green}\u${ColOff}@${Green}\h${ColOff} \
+${BBlue}\w${ColOff}\
+${Cyan}${M}${ColOff}")'\
+''$'\nξ '  # MSYS: Escaping \n with '$'
+
+  elif [ "full" == "${1}" -o "color" == "${1}" ]
+  then
+    if [ "full" == "${1}" ]
+    then
+      echo "Set PS1-full"
+      # Header
+      PS1='\[\033]0;\u@\h:\w\007\]'
+    else
+      echo "PS1-color (colored)."
+      PS1=''
+    fi
+    export PS1="${PS1}${BPurple}\t${ColOff} \
+${Green}\u${ColOff}@\
+${Green}\h${ColOff}:\
+${BBlue}\w${ColOff}"\
+${Cyan}\
+'$(git branch 2>/dev/null | sed -n -e "s/^\*\ \(.*\)/ (\1)/p")'\
+${ColOff}\
+''$'\nξ '  # ''$' for msys (git for Windows 2)
 
   else
     echo "Set PS1-bw (black and white)."
